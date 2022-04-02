@@ -1,8 +1,24 @@
+import os
+import random
 from django.db import models
 from datetime import date
 
 # Create your models here.
+def upload_image_path_profile(instance, filename):
+    new_filename = random.randint(1, 9996666666)
+    name, ext = get_filename_ext(filename)
+    final_filename = '{new_filename}{ext}'.format(
+        new_filename=new_filename, ext=ext)
+    return "portfolio/{new_filename}/{final_filename}".format(
+        new_filename=new_filename,
+        final_filename=final_filename
+    )
 
+
+def get_filename_ext(filepath):
+    base_name = os.path.basename(filepath)
+    name, ext = os.path.splitext(base_name)
+    return name, ext
 class Info(models.Model):
     name=models.CharField(max_length=100)
     email=models.EmailField()
@@ -29,14 +45,14 @@ class Portfolio(models.Model):
     project_url=models.CharField(max_length=300)
     description=models.TextField()
     category_filter=models.CharField(max_length=100,choices=FILTER_CHOICES,default='web')
-    image=models.ImageField()
+    image=models.ImageField(upload_to=upload_image_path_profile)
 
     def __str__(self):
         return self.titel
     
 class Images(models.Model):
     portfolio=models.ForeignKey(Portfolio,on_delete=models.CASCADE)
-    image=models.ImageField()
+    image=models.ImageField(upload_to=upload_image_path_profile)
     def get_category(self):
         return self.portfolio.category_filter
     def get_portfolio_id(self):
