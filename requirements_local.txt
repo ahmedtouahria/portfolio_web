@@ -8,3 +8,4 @@ python-decouple==3.6
 sqlparse==0.4.2
 static3==0.7.0
 tzdata==2022.1
+whitenoise==6.0.0
