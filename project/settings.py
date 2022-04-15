@@ -124,7 +124,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'project/static')]
-MEDIA_ROOT = os.path.join(BASE_DIR, '') # 'data' is my media folder
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 'data' is my media folder
 MEDIA_URL = '/media/'
 
 # Default primary key field type
