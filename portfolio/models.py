@@ -45,14 +45,14 @@ class Portfolio(models.Model):
     project_url=models.CharField(max_length=300)
     description=models.TextField()
     category_filter=models.CharField(max_length=100,choices=FILTER_CHOICES,default='web')
-    image=models.ImageField(upload_to=upload_image_path_profile)
+    image=models.ImageField(upload_to='media')
 
     def __str__(self):
         return self.titel
     
 class Images(models.Model):
     portfolio=models.ForeignKey(Portfolio,on_delete=models.CASCADE)
-    image=models.ImageField(upload_to=upload_image_path_profile)
+    image=models.ImageField(upload_to='media')
     def get_category(self):
         return self.portfolio.category_filter
     def get_portfolio_id(self):
